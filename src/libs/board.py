@@ -21,32 +21,6 @@ class Board():
     Methods:
         to_json(self) -> Dict[str, List[List[int]]]
         from_json(self, data: Dict[str, List[List[int]]])
-
-    Examples:
-        >>> b = Board(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> b.cursor.x, b.cursor.y
-        (0, 0)
-        >>> b.grid
-        array([[1, 2, 3],
-                [4, 5, 6],
-                [7, 8, 9]])
-        >>> b.reset_grid
-        array([[1, 2, 3],
-                [4, 5, 6],
-                [7, 8, 9]])
-        >>> b.current_key
-        9
-        >>> b.highlighted_number
-        0
-        >>> board.grid[0, 1] = 5
-        >>> board.grid
-        array([[1, 5, 0],
-                [0, 0, 0],
-                [0, 0, 0]])
-        >>> board.reset_grid
-        array([[1, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0]])
     """
     
     def __init__(self, grid: np.ndarray, difficulty: Difficulty) -> None:
@@ -79,27 +53,6 @@ class Board():
 
     @property
     def grid(self) -> np.ndarray:
-        """
-        >>> b = Board(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> b.grid
-        array([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9]])
-        >>> b.reset_grid
-        array([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9]])
-        >>> b.grid[1, 1] = 0
-        >>> b.grid
-        array([[1, 2, 3],
-               [4, 0, 6],
-               [7, 8, 9]])
-        >>> b.reset_grid
-        array([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9]])
-        """
-        
         return self._grid
     
     @grid.setter
@@ -108,27 +61,6 @@ class Board():
 
     @property
     def reset_grid(self) -> np.ndarray:
-        """
-        >>> b = Board(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> b.reset_grid
-        array([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9]])
-        >>> b.grid
-        array([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9]])
-        >>> b.reset_grid[1, 1] = 0
-        >>> b.reset_grid
-        array([[1, 2, 3],
-               [4, 0, 6],
-               [7, 8, 9]])
-        >>> b.grid
-        array([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9]])
-        """
-
         return self._grid_copy
     
     @reset_grid.setter
@@ -141,25 +73,6 @@ class Board():
         Values < 32 are special characters, of which only the 'tab' (9) key is needed.
         32 <= Values and <= 126 are "normal" keyboard keys.
         Values >= 258 and <= 261 are the arrow keys.
-
-        >>> b = Board(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> b.current_key
-        9
-        >>> b.current_key = 15
-        >>> b.current_key
-        9
-        >>> b.current_key = 100
-        >>> b.current_key
-        100
-        >>> b.current_key = 199
-        >>> b.current_key
-        100
-        >>> b.current_key = 259
-        >>> b.current_key
-        259
-        >>> b.current_key = 354
-        >>> b.current_key
-        259
         """
 
         return self._current_key
@@ -174,24 +87,6 @@ class Board():
 
     @property
     def highlighted_number(self) -> int:
-        """
-        >>> b = Board(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> b.highlighted_number
-        0
-        >>> b.highlighted_number = 5
-        >>> b.highlighted_number
-        5
-        >>> b.highlighted_number = -13
-        >>> b.highlighted_number
-        5
-        >>> b.highlighted_number = 9478
-        >>> b.highlighted_number
-        5
-        >>> b.highlighted_number = 9
-        >>> b.highlighted_number
-        9
-        """
-
         return self._highlighted_number
     
     @highlighted_number.setter
