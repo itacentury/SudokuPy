@@ -7,19 +7,6 @@ class Cursor:
     Attributes:
         x (int): The x-coordinate of the cursor. Non-integer values are ignored, and negative values are reset to 0.
         y (int): The y-coordinate of the cursor. Similar to `x`, non-integer and negative values are not accepted.
-
-    Examples:
-        >>> c = Cursor()
-        >>> c.x, c.y
-        (0, 0)
-        >>> c.x = 5
-        >>> c.y = -3
-        >>> c.x, c.y
-        (5, 0)
-        >>> c.x = "13"
-        >>> c.y = 2.7
-        >>> c.x, c.y
-        (5, 0)
     """
     
     def __init__(self) -> None:
