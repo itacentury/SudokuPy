@@ -1,6 +1,7 @@
 # Custom
 highscores
 *.json
+!/.vscode/*.json
 
 # Latex files
 *.aux
@@ -101,9 +102,6 @@ cython_debug/
 
 # PyCharm
 .idea/
-
-# VSCode
-.vscode/
 
 # Local .env files
 *.env
