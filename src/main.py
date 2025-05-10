@@ -3,10 +3,9 @@ import sys
 from game import Game
 from libs.difficulty import Difficulty
 
+
 def main() -> None:
-    argv_len: int = len(sys.argv)
-    
-    if argv_len > 2:
+    if (argv_len := len(sys.argv)) > 2:
         print("Too many arguments given!")
         print("Only expecting 0 or 1 argument. Try again.")
         sys.exit(-1)
@@ -19,6 +18,7 @@ def main() -> None:
 
     game = Game(difficulty)
     game.run()
+
 
 if __name__ == "__main__":
     main()

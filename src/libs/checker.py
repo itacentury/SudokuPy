@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class SudokuChecker:
     """
     The SudokuChecker class is designed to validate Sudoku solutions. It takes a 2D numpy array representing
@@ -14,7 +15,7 @@ class SudokuChecker:
         is_valid_solution(self) -> bool
         __is_unique(self, arr: np.ndarray) -> bool
     """
-    
+
     def __init__(self, grid: np.ndarray) -> None:
         """
         Initializes the class with a Sudoku grid.
@@ -37,18 +38,20 @@ class SudokuChecker:
         for row in range(self.size):
             if not self.__is_unique(self.grid[row, :]):
                 return False
-        
+
         for col in range(self.size):
             if not self.__is_unique(self.grid[:, col]):
                 return False
-        
+
         for row in range(0, self.size, 3):
             for col in range(0, self.size, 3):
-                if not self.__is_unique(self.grid[row:row + 3, col:col + 3].flatten()):
+                if not self.__is_unique(
+                    self.grid[row : row + 3, col : col + 3].flatten()
+                ):
                     return False
-        
+
         return True
-    
+
     def __is_unique(self, arr: np.ndarray) -> bool:
         """
         Checks if all elements in an array are unique and form a sequence from 1 to the size of the Sudoku board.
@@ -61,7 +64,7 @@ class SudokuChecker:
         """
 
         return np.array_equal(np.sort(arr), np.arange(1, self.size + 1))
-    
+
     @property
     def grid(self) -> np.ndarray:
         return self._board
@@ -74,7 +77,7 @@ class SudokuChecker:
     @property
     def size(self) -> int:
         return self._size
-    
+
     @size.setter
     def size(self, value: int) -> None:
         if value < 1:

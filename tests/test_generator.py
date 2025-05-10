@@ -5,6 +5,7 @@ from libs.difficulty import Difficulty
 
 # Pytest tests for SudokuGenerator class, converted from generator.py doctests.
 
+
 def test_generated_puzzle_instance() -> None:
     """
     Check instance of generated puzzle.
@@ -13,6 +14,7 @@ def test_generated_puzzle_instance() -> None:
     generator = SudokuGenerator(difficulty=Difficulty.EASY)
     puzzle = generator.generate()
     assert isinstance(puzzle, np.ndarray)
+
 
 def test_generated_puzzle_shape() -> None:
     """

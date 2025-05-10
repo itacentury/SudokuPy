@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class GameState(Enum):
     """
     Represents the possible states of a game session.

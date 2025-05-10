@@ -2,6 +2,7 @@ from libs.cursor import Cursor
 
 # Pytest tests for Cursor class, converted from cursor.py doctests.
 
+
 def test_initial_position() -> None:
     """
     Test that a new Cursor starts at (0, 0).
@@ -10,6 +11,7 @@ def test_initial_position() -> None:
     c = Cursor()
     assert c.x == 0
     assert c.y == 0
+
 
 def test_valid_x_and_negative_y_assignment() -> None:
     """
@@ -21,6 +23,7 @@ def test_valid_x_and_negative_y_assignment() -> None:
     c.y = -3
     assert c.x == 5
     assert c.y == 0
+
 
 def test_non_integer_assignments_are_ignored() -> None:
     """

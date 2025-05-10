@@ -16,7 +16,7 @@ class Player:
     @property
     def name(self) -> str:
         return self._name
-    
+
     @name.setter
     def name(self, value: str) -> None:
         if not isinstance(value, str):
@@ -26,7 +26,7 @@ class Player:
     @property
     def score(self) -> int:
         return self._score
-    
+
     @score.setter
     def score(self, value: int) -> None:
         if not isinstance(value, int):

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Difficulty(Enum):
     """
     Represents the difficulty levels of a game with three levels: easy, medium, and hard.
@@ -13,16 +14,16 @@ class Difficulty(Enum):
     EASY = (1, "easy")
     MEDIUM = (2, "medium")
     HARD = (3, "hard")
-    
+
     def __init__(self, num: int, label: str) -> None:
         """
         Initializes a new instance of the Difficulty enum.
-        
+
         Args:
             num (int): The numeric value associated with the difficulty level.
             label (str): The string label representing the difficulty level.
         """
-        
+
         self.num: int = num
         self.label: str = label
 
@@ -33,9 +34,9 @@ class Difficulty(Enum):
         Returns:
             str: The label of the difficulty.
         """
-                
+
         return self.label
-    
+
     @staticmethod
     def from_str(label: str) -> "Difficulty":
         """
@@ -51,9 +52,9 @@ class Difficulty(Enum):
 
         if label == "easy":
             return Difficulty.EASY
-        elif label == "medium":
+        if label == "medium":
             return Difficulty.MEDIUM
-        elif label == "hard":
+        if label == "hard":
             return Difficulty.HARD
-        else:
-            return Difficulty.MEDIUM
+
+        return Difficulty.MEDIUM

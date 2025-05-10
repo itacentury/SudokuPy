@@ -1,11 +1,10 @@
 import numpy as np
 
-from typing import Dict, List
-
 from libs.cursor import Cursor
 from libs.difficulty import Difficulty
 
-class Board():
+
+class Board:
     """
     Represents the game board for a Sudoku-like game, managing the grid, cursor position, and game state.
 
@@ -22,7 +21,7 @@ class Board():
         to_json(self) -> Dict[str, List[List[int]]]
         from_json(self, data: Dict[str, List[List[int]]])
     """
-    
+
     def __init__(self, grid: np.ndarray, difficulty: Difficulty) -> None:
         self.cursor: Cursor = Cursor()
         self.grid: np.ndarray = grid
@@ -32,18 +31,18 @@ class Board():
         self.time: int = 0
         self.difficulty: Difficulty = difficulty
 
-    def to_json(self) -> Dict[str, List[List[int]]]:
+    def to_json(self) -> dict[str, list[list[int]]]:
         """
         Serializes the board's state to a JSON dictionary.
         """
 
-        data: Dict[str, List[List[int]]] = {
+        data: dict[str, list[list[int]]] = {
             "grid": self.grid.tolist(),
-            "reset_grid": self.reset_grid.tolist()
+            "reset_grid": self.reset_grid.tolist(),
         }
         return data
-    
-    def from_json(self, data: Dict[str, List[List[int]]]) -> None:
+
+    def from_json(self, data: dict[str, list[list[int]]]) -> None:
         """
         Loads the board's state from a Dict.
         """
@@ -54,7 +53,7 @@ class Board():
     @property
     def grid(self) -> np.ndarray:
         return self._grid
-    
+
     @grid.setter
     def grid(self, value: np.ndarray) -> None:
         self._grid = value
@@ -62,7 +61,7 @@ class Board():
     @property
     def reset_grid(self) -> np.ndarray:
         return self._grid_copy
-    
+
     @reset_grid.setter
     def reset_grid(self, value: np.ndarray) -> None:
         self._grid_copy = value
@@ -76,19 +75,17 @@ class Board():
         """
 
         return self._current_key
-    
+
     @current_key.setter
     def current_key(self, value: int) -> None:
-        if (value < 32 and value != 9) \
-                or (126 < value < 258) \
-                or value > 261:
+        if (value < 32 and value != 9) or (126 < value < 258) or value > 261:
             return
         self._current_key = value
 
     @property
     def highlighted_number(self) -> int:
         return self._highlighted_number
-    
+
     @highlighted_number.setter
     def highlighted_number(self, value: int) -> None:
         if not (0 <= value <= 9):

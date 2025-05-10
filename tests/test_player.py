@@ -2,14 +2,16 @@ from player import Player
 
 # Pytest tests for Player class, converted from player.py doctests.
 
+
 def test_initial_state() -> None:
     """
     Test that a new Player has the correct name and a score of zero.
     """
-    
+
     p = Player("test")
     assert p.name == "test"
     assert p.score == 0
+
 
 def test_invalid_name_assignment() -> None:
     """
@@ -20,6 +22,7 @@ def test_invalid_name_assignment() -> None:
     p.name = 15
     assert p.name == "test"
 
+
 def test_invalid_score_assignment() -> None:
     """
     Test that assigning a non-integer value to score does not change the existing score.
@@ -29,6 +32,7 @@ def test_invalid_score_assignment() -> None:
     p.score = "30"
     assert p.score == 0
 
+
 def test_valid_name_assignment() -> None:
     """
     Test that assigning a valid string to name updates the name correctly.
@@ -37,6 +41,7 @@ def test_valid_name_assignment() -> None:
     p = Player("test")
     p.name = "15"
     assert p.name == "15"
+
 
 def test_valid_score_assignment() -> None:
     """

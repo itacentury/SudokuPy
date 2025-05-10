@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import numpy as np
 
-from typing import Tuple
 
 class SudokuSolver:
     """
@@ -48,7 +49,7 @@ class SudokuSolver:
 
         return False
 
-    def __find_empty_cell(self) -> Tuple[int, int] | Tuple[None, None]:
+    def __find_empty_cell(self) -> tuple[int, int] | tuple[None, None]:
         """
         Finds the next empty cell (0) on the board.
 
@@ -80,6 +81,6 @@ class SudokuSolver:
         if num in self.board[:, col]:
             return False
         start_row, start_col = 3 * (row // 3), 3 * (col // 3)
-        if num in self.board[start_row:start_row + 3, start_col:start_col + 3]:
+        if num in self.board[start_row : start_row + 3, start_col : start_col + 3]:
             return False
         return True

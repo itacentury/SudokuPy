@@ -19,6 +19,6 @@ class StringUtil:
             raise ValueError("max_length must be at least 3")
 
         part_length: int = (max_length - 2) // 2
-        first_part: str = s[:part_length + (max_length % 2)]
+        first_part: str = s[: part_length + (max_length % 2)]
         last_part: str = s[-part_length:]
         return f"{first_part}..{last_part}"

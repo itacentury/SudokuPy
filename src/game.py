@@ -5,7 +5,8 @@ import curses
 import tkinter as tk
 
 from tkinter import filedialog
-from typing import Optional, Literal, Dict, Callable, List
+from typing import Literal
+from collections.abc import Callable
 
 from player import Player
 from user_interface import UI
@@ -14,6 +15,7 @@ from libs.board import Board
 from libs.highscores import HighScoreManager
 from libs.checker import SudokuChecker
 from libs.difficulty import Difficulty
+
 
 class Game:
     """
@@ -53,9 +55,9 @@ class Game:
             difficulty (Difficulty): The difficulty setting for the game, defaults to Difficulty.MEDIUM.
         """
 
-        self.ui: Optional[UI] = None
-        self.player: Optional[Player] = None
-        self.board: Optional[Board] = None
+        self.ui: UI | None = None
+        self.player: Player | None = None
+        self.board: Board | None = None
         self.hs_manager: HighScoreManager = HighScoreManager()
         self.generator = SudokuGenerator(difficulty=difficulty)
         self.difficulty: Difficulty = difficulty
@@ -82,23 +84,25 @@ class Game:
             initialdir="/",
             title="Select location to save your game",
             filetypes=[("json files", "*.json")],
-            defaultextension=".json"
+            defaultextension=".json",
         )
 
         if not file_path:
             return
 
         try:
-            with open(file_path, 'w') as file:
+            with open(file_path, "w", encoding="utf-8") as file:
                 json.dump(self.__game_to_json(), file)
         except FileNotFoundError:
             print(f"Error: File not found at '{file_path}'")
         except PermissionError:
             print(f"Error: Permission denied to read '{file_path}'")
-        except Exception as e:
-            print(f"Error reading file: {e}")
+        except TypeError as e:
+            print(f"Error serializing game state to JSON: {e}")
+        except OSError as e:
+            print(f"I/O error while writing '{file_path}': {e}")
 
-    def __game_to_json(self) -> Dict[str, any]:
+    def __game_to_json(self) -> dict[str, any]:
         """
         Serializes the current game state into a dictionary.
 
@@ -111,15 +115,15 @@ class Game:
                             with keys for the player's name, difficulty, start time,
                             saved time, and the state of the game board.
         """
-        
-        game_state: Dict[str, any] = {
-            "name":  self.player.name,
+
+        game_state: dict[str, any] = {
+            "name": self.player.name,
             "difficulty": str(self.board.difficulty),
-            "start_time":  self.ui.drawing.start_time,
+            "start_time": self.ui.drawing.start_time,
             "saved_time": time.time(),
-            "board":  self.board.to_json()
+            "board": self.board.to_json(),
         }
-        
+
         return game_state
 
     def __load_game_state(self) -> None:
@@ -133,26 +137,30 @@ class Game:
         file_path: str = filedialog.askopenfilename(
             initialdir="/",
             title="Select game file to load",
-            filetypes=[("json files", "*.json")]
+            filetypes=[("json files", "*.json")],
         )
 
         if not file_path:
             return
 
         try:
-            with open(file_path, 'r') as file:
-                data: Dict[str, any] = json.load(file)
+            with open(file_path, "r", encoding="utf-8") as file:
+                data: dict[str, any] = json.load(file)
             self.player.name = data["name"]
             self.difficulty = Difficulty.from_str(data["difficulty"])
             self.board.difficulty = Difficulty.from_str(data["difficulty"])
-            self.ui.drawing.start_time = data["start_time"] + (time.time() - data["saved_time"])
+            self.ui.drawing.start_time = data["start_time"] + (
+                time.time() - data["saved_time"]
+            )
             self.board.from_json(data["board"])
         except FileNotFoundError:
             print(f"Error: File not found at '{file_path}'")
         except PermissionError:
             print(f"Error: Permission denied to read '{file_path}'")
-        except Exception as e:
-            print(f"Error reading file: {e}")
+        except TypeError as e:
+            print(f"Error serializing game state to JSON: {e}")
+        except OSError as e:
+            print(f"I/O error while reading '{file_path}': {e}")
 
     def __switch_to_ai(self) -> None:
         """
@@ -170,7 +178,7 @@ class Game:
             key (int): The key code of the pressed key.
         """
 
-        if key == ord('q'):
+        if key == ord("q"):
             self.__finish_game()
             return
 
@@ -184,29 +192,31 @@ class Game:
             key (int): The key code of the pressed key.
         """
 
-        cursor_actions: Dict[int, Callable[[Literal["x", "y"], Literal[1, -1]], None]]  = {
-            curses.KEY_UP: lambda: self.__move_cursor('y', -1),
-            curses.KEY_DOWN: lambda: self.__move_cursor('y', 1),
-            curses.KEY_LEFT: lambda: self.__move_cursor('x', -1),
-            curses.KEY_RIGHT: lambda: self.__move_cursor('x', 1),
+        cursor_actions: dict[
+            int, Callable[[Literal["x", "y"], Literal[1, -1]], None]
+        ] = {
+            curses.KEY_UP: lambda: self.__move_cursor("y", -1),
+            curses.KEY_DOWN: lambda: self.__move_cursor("y", 1),
+            curses.KEY_LEFT: lambda: self.__move_cursor("x", -1),
+            curses.KEY_RIGHT: lambda: self.__move_cursor("x", 1),
         }
 
         if key in cursor_actions:
             cursor_actions[key]()
 
-        special_actions: Dict[int, Callable[[None], None]] = {
-            ord('r'): lambda: self.__reset_board(),
-            ord('R'): lambda: self.__reset_board(),
-            ord('c'): lambda: self.__check_solution(),
-            ord('C'): lambda: self.__check_solution(),
-            ord('+'): lambda: self.__incr_highlighted_num(),
-            ord('-'): lambda: self.__decr_highlighted_num(),
-            ord('s'): lambda: self.__save_game_state(),
-            ord('S'): lambda: self.__save_game_state(),
-            ord('l'): lambda: self.__load_game_state(),
-            ord('L'): lambda: self.__load_game_state(),
-            ord('a'): lambda: self.__switch_to_ai(),
-            ord('A'): lambda: self.__switch_to_ai(),
+        special_actions: dict[int, Callable[[None], None]] = {
+            ord("r"): lambda: self.__reset_board(),
+            ord("R"): lambda: self.__reset_board(),
+            ord("c"): lambda: self.__check_solution(),
+            ord("C"): lambda: self.__check_solution(),
+            ord("+"): lambda: self.__incr_highlighted_num(),
+            ord("-"): lambda: self.__decr_highlighted_num(),
+            ord("s"): lambda: self.__save_game_state(),
+            ord("S"): lambda: self.__save_game_state(),
+            ord("l"): lambda: self.__load_game_state(),
+            ord("L"): lambda: self.__load_game_state(),
+            ord("a"): lambda: self.__switch_to_ai(),
+            ord("A"): lambda: self.__switch_to_ai(),
         }
 
         if key in special_actions:
@@ -224,9 +234,9 @@ class Game:
             delta (Literal[1, -1]): The direction and magnitude of the movement.
         """
 
-        if axis == 'x':
+        if axis == "x":
             self.board.cursor.x = min(max(0, self.board.cursor.x + delta), 8)
-        elif axis == 'y':
+        elif axis == "y":
             self.board.cursor.y = min(max(0, self.board.cursor.y + delta), 8)
 
     def __reset_board(self) -> None:
@@ -277,7 +287,9 @@ class Game:
         """
 
         if self.player and self.player.score > 0:
-            self.hs_manager.add_highscore(self.player.name, self.player.score, self.difficulty)
+            self.hs_manager.add_highscore(
+                self.player.name, self.player.score, self.difficulty
+            )
         self.hs_manager.save_highscore()
         sys.exit(0)
 
@@ -297,7 +309,7 @@ class Game:
         """
         Starts and runs the game.
         """
-        
+
         self.board = Board(self.generator.generate(), self.difficulty)
         ui = UI(self, self.board)
         self.ui = ui

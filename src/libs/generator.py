@@ -1,11 +1,10 @@
 import random
 import numpy as np
 
-from typing import List, Optional, Dict, Tuple
-
 from libs.checker import SudokuChecker
 from libs.solver import SudokuSolver
 from libs.difficulty import Difficulty
+
 
 class SudokuGenerator:
     """
@@ -38,11 +37,13 @@ class SudokuGenerator:
 
         self.size: int = size
         self.board: np.ndarray = np.zeros((self.size, self.size), dtype=int)
-        self.rng: np.random.Generator = np.random.default_rng(seed=random.randint(1, 10 ** 10))
+        self.rng: np.random.Generator = np.random.default_rng(
+            seed=random.randint(1, 10**10)
+        )
         self.subgrid_size: int = int(np.sqrt(self.size))
         self.difficulty: Difficulty = difficulty
-        
-    def generate(self) -> Optional[np.ndarray]:
+
+    def generate(self) -> np.ndarray | None:
         """
         Generates a Sudoku puzzle and returns the board.
 
@@ -72,7 +73,7 @@ class SudokuGenerator:
         if row == self.size - 1 and col == self.size:
             return True
 
-        if col == self.size:  
+        if col == self.size:
             row += 1
             col = 0
 
@@ -84,10 +85,10 @@ class SudokuGenerator:
                 self.board[row, col] = num
                 if self.__fill_board(row, col + 1):
                     return True
-        
+
         self.board[row, col] = 0
         return False
-    
+
     def __is_safe(self, row: int, col: int, num: int) -> bool:
         """
         Checks if it's safe to place a number in the given row and column.
@@ -103,8 +104,17 @@ class SudokuGenerator:
 
         if num in self.board[row, :] or num in self.board[:, col]:
             return False
-        start_row, start_col = row - row % self.subgrid_size, col - col % self.subgrid_size
-        if num in self.board[start_row:start_row + self.subgrid_size, start_col:start_col + self.subgrid_size]:
+        start_row, start_col = (
+            row - row % self.subgrid_size,
+            col - col % self.subgrid_size,
+        )
+        if (
+            num
+            in self.board[
+                start_row : start_row + self.subgrid_size,
+                start_col : start_col + self.subgrid_size,
+            ]
+        ):
             return False
         return True
 
@@ -124,15 +134,17 @@ class SudokuGenerator:
         Removes cells from the puzzle based on the difficulty level to create the final puzzle.
         """
 
-        difficulty_levels: Dict[Difficulty, int] = {
+        difficulty_levels: dict[Difficulty, int] = {
             Difficulty.EASY: 20,
             Difficulty.MEDIUM: 35,
-            Difficulty.HARD: 50
+            Difficulty.HARD: 50,
         }
 
         cells_to_remove: int = difficulty_levels.get(self.difficulty, 35)
 
-        all_cells: List[Tuple[int, int]] = [(row, col) for row in range(self.size) for col in range(self.size)]
+        all_cells: list[tuple[int, int]] = [
+            (row, col) for row in range(self.size) for col in range(self.size)
+        ]
         self.rng.shuffle(all_cells)
 
         removed_count: int = 0
@@ -176,7 +188,7 @@ class SudokuGenerator:
 
     @subgrid_size.setter
     def subgrid_size(self, value: int) -> None:
-        if value ** 2 != self.size:
+        if value**2 != self.size:
             return
         self._subgrid_size = value
 

@@ -1,8 +1,7 @@
 import json
 
-from typing import Dict, List, Tuple
-
 from libs.difficulty import Difficulty
+
 
 class HighScoreManager:
     """
@@ -24,9 +23,9 @@ class HighScoreManager:
         """
 
         self.filename: str = "highscores"
-        self.highscores: Dict[str, List[Tuple[str, int, str]]] = self.load_highscore()
+        self.highscores: dict[str, list[tuple[str, int, str]]] = self.load_highscore()
 
-    def load_highscore(self) -> Dict[str, List[Tuple[str, int, str]]]:
+    def load_highscore(self) -> dict[str, list[tuple[str, int, str]]]:
         """
         Loads high scores from the specified file.
 
@@ -35,7 +34,7 @@ class HighScoreManager:
         """
 
         try:
-            with open(self.filename, 'r') as file:
+            with open(self.filename, "r", encoding="utf-8") as file:
                 data = json.load(file)
             return data
         except FileNotFoundError:
@@ -57,31 +56,35 @@ class HighScoreManager:
 
         if "scores" not in self.highscores:
             self.highscores["scores"] = []
-        
+
         insert_index: int = len(self.highscores["scores"])
         for i, existing_entry in enumerate(self.highscores["scores"]):
-            existing_score: int = existing_entry['score']
+            existing_score: int = existing_entry["score"]
             if score < existing_score:
                 insert_index = i
                 break
 
-        self.highscores["scores"].insert(insert_index, {'name': name, 'score': score, 'difficulty': str(difficulty)})
+        self.highscores["scores"].insert(
+            insert_index, {"name": name, "score": score, "difficulty": str(difficulty)}
+        )
 
     def save_highscore(self) -> None:
         """
         Saves the current high scores to the specified file.
         """
 
-        with open(self.filename, 'w') as file:
+        with open(self.filename, "w", encoding="utf-8") as file:
             json.dump(self.highscores, file)
 
     @property
-    def highscores(self) -> Dict[str, List[Tuple[str, int, str]]]:
+    def highscores(self) -> dict[str, list[tuple[str, int, str]]]:
         return self._highscores
 
     @highscores.setter
-    def highscores(self, value: Dict[str, List[Tuple[str, int, str]]]) -> None:
+    def highscores(self, value: dict[str, list[tuple[str, int, str]]]) -> None:
         self._highscores = value
         if "scores" in self._highscores:
-            difficulty_order: Dict[str, int] = {"hard": 0, "medium": 1, "easy": 2}
-            self._highscores["scores"].sort(key=lambda item: (difficulty_order[item["difficulty"]], item["score"]))
+            difficulty_order: dict[str, int] = {"hard": 0, "medium": 1, "easy": 2}
+            self._highscores["scores"].sort(
+                key=lambda item: (difficulty_order[item["difficulty"]], item["score"])
+            )

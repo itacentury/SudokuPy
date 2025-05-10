@@ -2,14 +2,13 @@ import time
 import curses
 import threading
 
-from typing import Optional
-
 from player import Player
 from ai_player import AiPlayer
 from libs.drawing import Drawing
 from libs.board import Board
 from libs.highscores import HighScoreManager
 from libs.game_state import GameState
+
 
 class UI:
     """
@@ -39,11 +38,11 @@ class UI:
             board (Board): The game board to be used.
         """
 
-        from game import Game
+        from game import Game  # pylint: disable=import-outside-toplevel
 
         self.board: Board = board
         self.game: Game = game
-        self.drawing: Optional[Drawing] = None
+        self.drawing: Drawing | None = None
         self.game_state = GameState.WAITING_FOR_NAME
         self.is_ai_player: bool = False
         self.ai_player: AiPlayer = AiPlayer(board)
@@ -74,7 +73,9 @@ class UI:
                 stdscr.refresh()
             elif self.game_state == GameState.GAME_IN_PROGRESS:
                 if clock_thread is None:
-                    clock_thread = threading.Thread(target=self.drawing.draw_clock, daemon=True)
+                    clock_thread = threading.Thread(
+                        target=self.drawing.draw_clock, daemon=True
+                    )
                     clock_thread.start()
 
                 self.__handle_input(stdscr)
@@ -100,8 +101,7 @@ class UI:
 
         key: int = -1
         if self.is_ai_player:
-            key = self.ai_player.calc_move()
-            if key == ord('c'):
+            if (key := self.ai_player.calc_move()) == ord("c"):
                 self.is_ai_player = False
                 time.sleep(2.5)
             time.sleep(0.25)
@@ -114,7 +114,7 @@ class UI:
         """
         Prompts the user for their name and updates the game and drawing instances with the new player.
         """
-        
+
         name: str = self.drawing.draw_name_input()
         player = Player(name)
         self.game.set_player(player)
