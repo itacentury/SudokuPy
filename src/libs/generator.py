@@ -25,12 +25,6 @@ class SudokuGenerator:
         __valid_sudoku(self) -> bool
         __remove_cells(self) -> None
         __has_unique_solution(self) -> bool
-
-    Examples:
-        >>> generator = SudokuGenerator(difficulty=Difficulty.EASY)
-        >>> puzzle = generator.generate()
-        >>> isinstance(puzzle, np.ndarray) and puzzle.shape == (9, 9)
-        True
     """
 
     def __init__(self, difficulty: Difficulty, size: int = 9) -> None:
