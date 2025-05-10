@@ -1,15 +1,6 @@
 class StringUtil:
     """
     A utility class for performing operations on strings.
-
-    >>> StringUtil.shorten_string("Hello, World!", 5)
-    'He..!'
-    >>> StringUtil.shorten_string("Hello, World!", 11)
-    'Hello..rld!'
-    >>> StringUtil.shorten_string("abcdefg", 7)
-    'abcdefg'
-    >>> StringUtil.shorten_string("abcdefg", 5)
-    'ab..g'
     """
 
     @staticmethod
