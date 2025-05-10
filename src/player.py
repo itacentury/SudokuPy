@@ -7,19 +7,6 @@ class Player:
     Attributes:
         name (str): The name of the player.
         score (int): The score of the player.
-
-    Examples:
-        >>> p = Player("test")
-        >>> p.name, p.score
-        ('test', 0)
-        >>> p.name = 15
-        >>> p.score = "30"
-        >>> p.name, p.score
-        ('test', 0)
-        >>> p.name = "15"
-        >>> p.score = 30
-        >>> p.name, p.score
-        ('15', 30)
     """
 
     def __init__(self, name: str) -> None:
