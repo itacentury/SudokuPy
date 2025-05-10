@@ -1,5 +1,5 @@
 # SudokuPy
-[![Python test](https://github.com/itacentury/SudokuPy/actions/workflows/python-test.yml/badge.svg)](https://github.com/itacentury/SudokuPy/actions/workflows/python-test.yml)
+[![tests](https://github.com/itacentury/SudokuPy/actions/workflows/python-test.yml/badge.svg)](https://github.com/itacentury/SudokuPy/actions/workflows/python-test.yml)
 
 ## Instructions
 
