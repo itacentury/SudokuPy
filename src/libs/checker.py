@@ -13,26 +13,6 @@ class SudokuChecker:
     Methods:
         is_valid_solution(self) -> bool
         __is_unique(self, arr: np.ndarray) -> bool
-
-    Examples:
-        >>> import numpy as np
-        >>> grid = np.array([[5, 3, 4, 6, 7, 8, 9, 1, 2],
-        ...                   [6, 7, 2, 1, 9, 5, 3, 4, 8],
-        ...                   [1, 9, 8, 3, 4, 2, 5, 6, 7],
-        ...                   [8, 5, 9, 7, 6, 1, 4, 2, 3],
-        ...                   [4, 2, 6, 8, 5, 3, 7, 9, 1],
-        ...                   [7, 1, 3, 9, 2, 4, 8, 5, 6],
-        ...                   [9, 6, 1, 5, 3, 7, 2, 8, 4],
-        ...                   [2, 8, 7, 4, 1, 9, 6, 3, 5],
-        ...                   [3, 4, 5, 2, 8, 6, 1, 7, 9]])
-        >>> checker = SudokuChecker(grid)
-        >>> checker.is_valid_solution()
-        True
-        >>> checker.size
-        9
-        >>> checker.grid = np.array([[1, 2], [3, 4]])
-        >>> checker.size
-        2
     """
     
     def __init__(self, grid: np.ndarray) -> None:
@@ -52,32 +32,6 @@ class SudokuChecker:
 
         Returns:
             bool: True if the solution is valid, False otherwise.
-
-        Examples:
-            >>> grid = np.array([[5, 3, 4, 6, 7, 8, 9, 1, 2],
-            ...                   [6, 7, 2, 1, 9, 5, 3, 4, 8],
-            ...                   [1, 9, 8, 3, 4, 2, 5, 6, 7],
-            ...                   [8, 5, 9, 7, 6, 1, 4, 2, 3],
-            ...                   [4, 2, 6, 8, 5, 3, 7, 9, 1],
-            ...                   [7, 1, 3, 9, 2, 4, 8, 5, 6],
-            ...                   [9, 6, 1, 5, 3, 7, 2, 8, 4],
-            ...                   [2, 8, 7, 4, 1, 9, 6, 3, 5],
-            ...                   [3, 4, 5, 2, 8, 6, 1, 7, 9]])
-            >>> checker = SudokuChecker(grid)
-            >>> checker.is_valid_solution()
-            True
-            >>> grid = np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ...                  [0, 0, 0, 0, 0, 0, 0, 0, 0]])
-            >>> checker = SudokuChecker(grid)
-            >>> checker.is_valid_solution()
-            False
         """
 
         for row in range(self.size):
@@ -114,16 +68,6 @@ class SudokuChecker:
 
     @grid.setter
     def grid(self, value: np.ndarray) -> None:
-        """
-        Examples:
-            >>> checker = SudokuChecker(np.array([[5, 6], [7, 8]]))
-            >>> checker.grid
-            array([[5, 6],
-                    [7, 8]])
-            >>> checker.size
-            2
-        """
-
         self._board = value
         self._size = len(value)
 
@@ -133,17 +77,6 @@ class SudokuChecker:
     
     @size.setter
     def size(self, value: int) -> None:
-        """
-        Examples:
-            >>> checker = SudokuChecker(np.array([[5, 6], [7, 8]]))
-            >>> checker.size = 2
-            >>> checker.size
-            2
-            >>> check.size = -3
-            >>> checker.size
-            2
-        """
-
         if value < 1:
             return
         self._size = value
