@@ -14,24 +14,6 @@ class SudokuSolver:
         solve(self) -> bool
         __find_empty_cell(self) -> Tuple[int, int] | Tuple[None, None]
         __is_valid(self, row: int, col: int, num: int) -> bool
-
-    Examples:
-        >>> board = np.array([
-        ...     [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        ...     [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        ...     [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        ...     [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        ...     [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        ...     [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        ...     [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        ...     [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        ...     [0, 0, 0, 0, 8, 0, 0, 7, 9]
-        ... ])
-        >>> solver = SudokuSolver(board)
-        >>> solver.solve()
-        True
-        >>> isinstance(solver.board, np.ndarray) and solver.board.shape == (9, 9)
-        True
     """
 
     def __init__(self, board: np.ndarray) -> None:
