@@ -1,14 +1,14 @@
 name: Pytest
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["Pylint"]
+    types:
+      - completed
 
 jobs:
-  build:
-
+  test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

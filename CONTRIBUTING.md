@@ -17,6 +17,8 @@ As the source code formatter, SudokuPy uses [black](https://pypi.org/project/bla
 black ./src/
 ```
 
+Run `pre-commit install` to set up the Git hook — it will automatically format your code before each commit.
+
 ## Linting
 
 SudokuPy follows the [PEP8](https://www.python.org/dev/peps/pep-0008/) style guide and uses [pylint](https://pypi.org/project/pylint/) to enforce this. To lint your code, run the following command:
