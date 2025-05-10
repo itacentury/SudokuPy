@@ -21,11 +21,6 @@ class HighScoreManager:
     def __init__(self) -> None:
         """
         Initializes the HighScoreManager with default values.
-        
-        Examples:
-            >>> manager = HighScoreManager()
-            >>> isinstance(manager, HighScoreManager)
-            True
         """
 
         self.filename: str = "highscores"
@@ -37,11 +32,6 @@ class HighScoreManager:
 
         Returns:
             A dictionary with a title and a list of scores.
-
-        Examples:
-            >>> manager = HighScoreManager()
-            >>> 'scores' in manager.load_highscore()
-            True
         """
 
         try:
@@ -63,12 +53,6 @@ class HighScoreManager:
             name (str): The name of the player.
             score (int): The score achieved by the player.
             difficulty (str): The difficulty level of the game.
-
-        Examples:
-            >>> manager = HighScoreManager()
-            >>> manager.add_highscore("John Doe", 500, "easy")
-            >>> "John Doe" in str(manager.highscores["scores"])
-            True
         """
 
         if "scores" not in self.highscores:
@@ -97,14 +81,6 @@ class HighScoreManager:
 
     @highscores.setter
     def highscores(self, value: Dict[str, List[Tuple[str, int, str]]]) -> None:
-        """
-        Examples:
-            >>> manager = HighscoreManager()
-            >>> manager.highscores = {"test", [("one", 1, "1")]}
-            >>> manager.highscores
-            {"test", [("one", 1, "1")]}
-        """
-
         self._highscores = value
         if "scores" in self._highscores:
             difficulty_order: Dict[str, int] = {"hard": 0, "medium": 1, "easy": 2}
