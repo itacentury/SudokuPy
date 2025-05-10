@@ -7,6 +7,8 @@ from user_interface import UI
 from libs.game_state import GameState
 from libs.difficulty import Difficulty
 
+# Pytest tests for UI class, converted from user_interface.py doctests.
+
 def test_ui_initial_state_waiting_for_name_and_not_ai() -> None:
     """
     Test that UI starts in the WAITING_FOR_NAME state and AI control is off.

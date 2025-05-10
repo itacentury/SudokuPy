@@ -1,4 +1,6 @@
-from libs.cursor import Cursor  # adjust module path as needed
+from libs.cursor import Cursor
+
+# Pytest tests for Cursor class, converted from cursor.py doctests.
 
 def test_initial_position() -> None:
     """

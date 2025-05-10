@@ -2,6 +2,8 @@ import numpy as np
 
 from libs.checker import SudokuChecker
 
+# Pytest tests for SudokuChecker class, converted from checker.py doctests.
+
 def test_valid_sudoku_solution() -> None:
     """
     Test that a known valid 9x9 Sudoku grid is considered a valid solution.

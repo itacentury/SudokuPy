@@ -8,20 +8,6 @@ class Difficulty(Enum):
     Attributes:
         num (int): The number corresponding to the enum value.
         label (str): The label to the corresponding enum value.
-
-    Examples:
-        >>> Difficulty.EASY
-        <Difficulty.EASY: (1, 'easy')>
-        >>> str(Difficulty.MEDIUM)
-        'medium'
-        >>> Difficulty.HARD.num
-        3
-        >>> Difficulty.from_str("easy")
-        <Difficulty.EASY: (1, 'easy')>
-        >>> Difficulty.from_str("unknown")
-        <Difficulty.MEDIUM: (2, 'medium')>
-        >>> Difficulty.from_str("hard") == Difficulty.HARD
-        True
     """
 
     EASY = (1, "easy")
@@ -61,16 +47,6 @@ class Difficulty(Enum):
 
         Returns:
             Difficulty: The matching Difficulty enum member.
-
-        Examples:
-            >>> Difficulty.from_str("easy")
-            <Difficulty.EASY: (1, 'easy')>
-            >>> Difficulty.from_str("medium")
-            <Difficulty.MEDIUM: (2, 'medium')>
-            >>> Difficulty.from_str("hard")
-            <Difficulty.HARD: (3, 'hard')>
-            >>> Difficulty.from_str("unknown")
-            <Difficulty.MEDIUM: (2, 'medium')>
         """
 
         if label == "easy":
