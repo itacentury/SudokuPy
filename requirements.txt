@@ -1,2 +1,2 @@
-numpy == 1.26.4
-windows-curses == 2.3.3; sys_platform == 'win32'
+numpy >= 1.26.4
+windows-curses >= 2.3.3; sys_platform == 'win32'
