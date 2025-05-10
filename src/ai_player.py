@@ -102,10 +102,3 @@ class AiPlayer:
         if num in self.board.grid[start_row:start_row + 3, start_col:start_col + 3]:
             return False
         return True
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

@@ -85,10 +85,3 @@ class HighScoreManager:
         if "scores" in self._highscores:
             difficulty_order: Dict[str, int] = {"hard": 0, "medium": 1, "easy": 2}
             self._highscores["scores"].sort(key=lambda item: (difficulty_order[item["difficulty"]], item["score"]))
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

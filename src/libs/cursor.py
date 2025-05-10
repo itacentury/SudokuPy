@@ -40,10 +40,3 @@ class Cursor:
         if value < 0:
             return
         self._y = value
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

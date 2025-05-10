@@ -303,10 +303,3 @@ class Game:
         self.ui = ui
 
         curses.wrapper(ui.wait_for_input, self.hs_manager)
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == '__main__':
-    main()

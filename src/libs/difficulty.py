@@ -57,10 +57,3 @@ class Difficulty(Enum):
             return Difficulty.HARD
         else:
             return Difficulty.MEDIUM
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

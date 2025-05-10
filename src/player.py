@@ -32,10 +32,3 @@ class Player:
         if not isinstance(value, int):
             return
         self._score = value
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == '__main__':
-    main()

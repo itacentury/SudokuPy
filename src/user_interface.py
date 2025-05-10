@@ -119,10 +119,3 @@ class UI:
         player = Player(name)
         self.game.set_player(player)
         self.drawing.set_player(player)
-            
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == '__main__':
-    main()

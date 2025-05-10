@@ -22,10 +22,3 @@ class StringUtil:
         first_part: str = s[:part_length + (max_length % 2)]
         last_part: str = s[-part_length:]
         return f"{first_part}..{last_part}"
-        
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

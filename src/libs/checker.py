@@ -80,10 +80,3 @@ class SudokuChecker:
         if value < 1:
             return
         self._size = value
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

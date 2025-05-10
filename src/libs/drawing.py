@@ -434,10 +434,3 @@ class Drawing:
         self.stdscr.getch()
         self.stdscr.clear()
         self.stdscr.refresh()
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

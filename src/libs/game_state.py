@@ -9,10 +9,3 @@ class GameState(Enum):
     GAME_READY = 2
     GAME_IN_PROGRESS = 3
     GAME_OVER = 4
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

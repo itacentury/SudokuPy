@@ -94,10 +94,3 @@ class Board():
         if not (0 <= value <= 9):
             return
         self._highlighted_number = value
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()

@@ -205,10 +205,3 @@ class SudokuGenerator:
     @rng.setter
     def rng(self, value: np.random.Generator) -> None:
         self._rng = value
-
-def main() -> None:
-    import doctest
-    doctest.testmod(verbose=True)
-
-if __name__ == "__main__":
-    main()
