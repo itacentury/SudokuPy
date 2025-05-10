@@ -28,18 +28,6 @@ class UI:
         __draw_and_update(self, stdscr: curses.window) -> None
         __handle_input(self, stdscr: curses.window) -> None
         __get_player_name(self) -> None
-        
-    Examples:
-        >>> from game import Game
-        >>> from libs.difficulty import Difficulty
-        >>> import numpy as np
-        >>> board = Board(np.array([[5, 6], [7, 8]]), Difficulty.MEDIUM)
-        >>> game = Game()
-        >>> ui = UI(game, board)
-        >>> ui.game_state == GameState.WAITING_FOR_NAME
-        True
-        >>> ui.is_ai_player
-        False
     """
 
     def __init__(self, game, board: Board) -> None:
